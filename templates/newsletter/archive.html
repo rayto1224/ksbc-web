@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}牧者心聲{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-dark">牧者心聲</h1>
+<p class="lead text-muted mx-auto" style="max-width: 600px;">耶和華是我的牧者，我必不至缺乏。</p>
+  </div>
+
+  {% if newsletters %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      {% for newsletter in newsletters %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 overflow-hidden hover-shadow-lg transition-all duration-300">
+            <!-- Optional: thumbnail/preview image – add field later if needed -->
+            <!-- <img src="{{ newsletter.thumbnail.url }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> -->
+            
+            <div class="card-body d-flex flex-column p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <time datetime="{{ newsletter.published_date|date:'Y-m-d' }}"
+                      class="text-primary fw-medium small">
+                  {{ newsletter.published_date|date:"F Y" }}
+                </time>
+                {% if newsletter.is_published %}
+                  <span class="badge bg-success rounded-pill">Published</span>
+                {% endif %}
+              </div>
+
+              <h5 class="card-title fw-semibold text-dark mb-3">
+                <a href="{{ newsletter.get_absolute_url }}" class="text-decoration-none text-dark hover-text-primary">
+                  {{ newsletter.title }}
+                </a>
+              </h5>
+
+              {% if newsletter.description %}
+                <p class="card-text text-secondary mb-4 flex-grow-1">
+                  {{ newsletter.description|truncatewords:30 }}
+                </p>
+              {% endif %}
+
+              <div class="mt-auto">
+                <a href="{{ newsletter.pdf_file.url }}"
+                   target="_blank"
+                   class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+                  <span>Read PDF</span>
+                  <svg class="ms-2" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+      <div class="mt-5 d-flex justify-content-center">
+        {% include "includes/pagination.html" with page_obj=page_obj %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="text-center py-5 bg-light rounded-3">
+      <h2 class="h3 text-muted">No newsletters yet</h2>
+      <p class="text-muted">Check back soon — new issues are coming!</p>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .hover-shadow-lg:hover {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    transform: translateY(-5px);
+  }
+  .hover-text-primary:hover {
+    color: #0d6efd !important;
+  }
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+</style>
+{% endblock %}

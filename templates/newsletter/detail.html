@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ newsletter.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="prose prose-lg max-w-none">
+    <header class="mb-10 text-center sm:text-left">
+      <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">{{ newsletter.title }}</h1>
+      <p class="mt-4 text-lg text-gray-600">
+        <time datetime="{{ newsletter.published_date|date:'Y-m-d' }}">
+          {{ newsletter.published_date|date:"F j, Y" }}
+        </time>
+      </p>
+    </header>
+
+    {% if newsletter.description %}
+      <div class="mb-10 p-6 bg-gray-50 rounded-xl border border-gray-200">
+        <p class="text-xl text-gray-700 leading-relaxed">{{ newsletter.description }}</p>
+      </div>
+    {% endif %}
+
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+      <div class="pdf-viewer aspect-[4/5] sm:aspect-[210/297] w-full">
+        <embed 
+          src="{{ newsletter.pdf_file.url }}#toolbar=1&navpanes=0&scrollbar=1&view=FitH"
+          type="application/pdf"
+          width="100%"
+          height="100%"
+          class="w-full h-full min-h-[600px] sm:min-h-[800px]">
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+      <a href="{{ newsletter.pdf_file.url }}"
+         target="_blank"
+         class="inline-flex items-center justify-center px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-lg">
+        Download PDF
+        <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+      </a>
+
+      <a href="{% url 'newsletter:archive' %}"
+         class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition text-lg">
+        ← Back to Archive
+      </a>
+    </div>
+  </article>
+</div>
+{% endblock %}
