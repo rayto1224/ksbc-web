@@ -1,6 +1,295 @@
 {% extends "base.html" %}
+<!-- load static -->
+{% load static %}
+<!-- about title -->
+{% block title %} | 團契小組 {% endblock %}
+<!-- about main content -->
 {% block content %}
 <div class="container mt-4 mb-5">
-<h3>Fellowship</h3>
+  <h3>團契小組聚會時間表</h3>
+  
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+      <head>
+        <meta charset="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        
+
+        <!-- Bootstrap 4 CSS -->
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"
+        />
+      </head>
+
+      <body>
+            <!-- 上方：原本表格／內容 -->
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-header font-weight-bold"><h4></h4>
+                    <div class="row">
+                    <div class="col-4"><h5>聚會/小組名稱</h5></div>
+                    <div class="col-3"><h5>日期</h5></div>
+                    <div class="col-3"><h5>時間</h5></div>
+                    <div class="col-2"><h5>地點</h5></div>
+                </div></div></div>
+
+                <div class="list-group list-group-flush" id="meetingList">
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="路得組"
+                        data-date="隔星期三"
+                        data-time="9:15–11:00 am"
+                        data-location="810"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">路得組</div>
+                        <div class="col-3">隔星期三</div>
+                        <div class="col-3">9:15-11:00 am</div>
+                        <div class="col-2">810</div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="長者福音班"
+                        data-date="星期四"
+                        data-time="2:30–3:30 pm"
+                        data-location="810"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_4.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">長者福音班</div>
+                        <div class="col-3">星期四</div>
+                        <div class="col-3">2:30-3:30 pm</div>
+                        <div class="col-2">810</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="職青團"
+                        data-date="隔星期六"
+                        data-time="8:30–10:00 pm"
+                        data-location="Zoom"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_4.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">職青團</div>
+                        <div class="col-3">隔星期六</div>
+                        <div class="col-3">8:30-10:00 pm</div>
+                        <div class="col-2">zoom</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="小天使團契"
+                        data-date="星期六"
+                        data-time="2:30-4:00 pm"
+                        data-location="禮堂"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_3.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">小天使團契</div>
+                        <div class="col-3">星期六</div>
+                        <div class="col-3">2:30-4:00 pm</div>
+                        <div class="col-2">禮堂</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="主日崇拜"
+                        data-date="主日"
+                        data-time="9:30–11:00 am"
+                        data-location="禮堂"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">主日崇拜</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">9:30-11:00 am</div>
+                        <div class="col-2">禮堂</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="主日兒童崇拜"
+                        data-date="主日"
+                        data-time="9:30–11:00 am"
+                        data-location="4號課室"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">主日兒童崇拜</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">9:30-11:00 am</div>
+                        <div class="col-2">4號課室</div>
+                    </div>
+                    </button>
+                    
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="成年組"
+                        data-date="主日"
+                        data-time="11:00-12:30 pm"
+                        data-location="禮堂"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_4.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">成年組</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">11:00-12:30 pm</div>
+                        <div class="col-2">禮堂</div>
+                    </div>
+                    </button>
+                    
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="信仰查經班"
+                        data-date="主日"
+                        data-time="11:00-12:30 pm"
+                        data-location="2號課室"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">信仰查經班</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">11:00-12:30 pm</div>
+                        <div class="col-2">2號課室</div>
+                    </div>
+                    </button>
+                    
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="青少年組"
+                        data-date="主日"
+                        data-time="11:00-12:30 pm"
+                        data-location="810"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_4.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">青少年組</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">11:00-12:30 pm</div>
+                        <div class="col-2">810</div>
+                    </div>
+                    </button>
+                    
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="兒童組"
+                        data-date="主日"
+                        data-time="11:00-12:30 pm"
+                        data-location="4號課室"
+                        data-poster="https://www.ksbaptist-hk.org/material/poster_4.jpg"
+                    >
+                    <div class="row">
+                        <div class="col-4">兒童組</div>
+                        <div class="col-3">主日</div>
+                        <div class="col-3">11:00-12:30 pm</div>
+                        <div class="col-2">4號課室</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="教會祈禱會"
+                        data-date="每月第一主日"
+                        data-time="11:00-11:30 pm"
+                        data-location="禮堂"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">教會祈禱會</div>
+                        <div class="col-3">每月第一主日</div>
+                        <div class="col-3">11:00-11:30 pm</div>
+                        <div class="col-2">禮堂</div>
+                    </div>
+                    </button>
+
+                    <button
+                        class="list-group-item list-group-item-action"
+                        data-title="祈禱網絡"
+                        data-date="每週一次"
+                        data-time="自訂"
+                        data-location="小組式"
+                        data-poster=""
+                    >
+                    <div class="row">
+                        <div class="col-4">祈禱網絡</div>
+                        <div class="col-3">每週一次</div>
+                        <div class="col-3">自訂</div>
+                        <div class="col-2">小組式</div>
+                    </div>
+                    </button>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <!-- 右方：內容 -->
+            <div class="card">
+              <!-- 右方：Poster 顯示區 -->
+              <div id="posterArea">
+                <div class="alert alert-secondary">
+                  請按左邊聚會項目，下方會顯示活動 Poster。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bootstrap 4 JS（必須順序） -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+          const meetingList = document.getElementById("meetingList");
+          const posterArea = document.getElementById("posterArea");
+
+          meetingList.addEventListener("click", function (e) {
+            const item = e.target.closest(".list-group-item");
+            if (!item) return;
+
+            // Active 樣式
+            document
+              .querySelectorAll("#meetingList .list-group-item")
+              .forEach((el) => el.classList.remove("active"));
+            item.classList.add("active");
+
+            const title = item.dataset.title;
+            const date = item.dataset.date;
+            const time = item.dataset.time;
+            const location = item.dataset.location;
+            const poster =
+              item.dataset.poster || "https://picsum.photos/1450/600";
+
+            posterArea.innerHTML = `
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">${title}</h5>
+          <ul class="list-unstyled text-muted mb-0">
+            <li>📅 日期：${date}</li>
+            <li>⏰ 時間：${time}</li>
+            <li>📍 地點：${location}</li>
+          </ul>
+        </div>
+        <img src="${poster}" class="card-img-top"
+             style="max-height:1450px; object-fit:cover;"
+             alt="${title} poster">
+      </div>
+    `;
+          });
+        </script>
+      </body>
+    </html>
+
 </div>
 {% endblock %}
