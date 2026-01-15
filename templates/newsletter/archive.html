@@ -13,11 +13,11 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       {% for newsletter in newsletters %}
         <div class="col">
-          <div class="card h-100 shadow-sm border-0 overflow-hidden hover-shadow-lg transition-all duration-300">
+          <div class="card w-100 h-100 shadow-sm border-0 overflow-hidden hover-shadow-lg transition-all duration-300" style="max-width: 250px;">
             <!-- Optional: thumbnail/preview image – add field later if needed -->
             <!-- <img src="{{ newsletter.thumbnail.url }}" class="card-img-top" alt="..." style="height: 180px; object-fit: cover;"> -->
             
-            <div class="card-body d-flex flex-column p-4">
+            <div class="card-body d-flex flex-column p-4 text-start">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <time datetime="{{ newsletter.published_date|date:'Y-m-d' }}"
                       class="text-primary fw-medium small">

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+
+      <h1 class="mb-4">My Dashboard</h1>
+      <p class="lead mb-5">Welcome back, {{ user.get_full_name|default:user.username }}! Here's a summary of your registered activities.</p>
+
+      {% if not registrations %}
+        <div class="alert alert-info text-center py-5">
+          <h5>You haven't registered for any events yet.</h5>
+          <p>Explore upcoming events and join one!</p>
+          <a href="{% url 'activities:list' %}" class="btn btn-primary mt-3">Browse Events</a>
+        </div>
+      {% else %}
+
+      <!-- Table view for registrations -->
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-sm">
+          <thead class="table-dark">
+            <tr>
+              <th>Event Title</th>
+              <th>Registration Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reg in registrations %}
+            <tr>
+              <td>
+                <a href="{% url 'activities:detail' event_id=reg.event.event_id %}">
+                  {{ reg.event.title }}
+                </a>
+                {% if reg.event.is_featured %}
+                  <span class="badge bg-warning ms-2">Featured</span>
+                {% endif %}
+              </td>
+              <td>{{ reg.registered_at|date:"d M Y" }}</td>
+              <td>
+                {% with status=reg.registration_status %}
+                  <span class="badge {% if status == 'Accepted' %}bg-success
+                                     {% elif status == 'Withdrawn' %}bg-secondary
+                                     {% elif status == 'Event ended' %}bg-info
+                                     {% elif status == 'Rejected' %}bg-danger
+                                     {% else %}bg-primary{% endif %}">
+                    {{ status }}
+                  </span>
+                {% endwith %}
+              </td>
+              <td>
+                {% if reg.withdrawal_date %}
+                  <span class="text-muted">Withdrawn on {{ reg.withdrawal_date|date:"d M Y" }}</span>
+                {% elif reg.event.is_expired or reg.event.quota_full or status == 'Rejected' %}
+                  <span class="text-muted">No actions available</span>
+                {% else %}
+                  <a href="{% url 'activities:withdraw' registration_id=reg.id %}" class="btn btn-outline-danger btn-sm">
+                    Withdraw
+                  </a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination if needed -->
+      {% if is_paginated %}
+        <nav aria-label="Pagination" class="mt-4">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span></li>
+            {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+
+      {% endif %}
+
+      <!-- Quick links -->
+      <div class="text-center mt-5">
+        <a href="{% url 'activities:list' %}" class="btn btn-outline-primary">Find More Events</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+
+      <!-- Back link -->
+      <a href="{% url 'activities:detail' event_id=event.event_id %}" class="btn btn-outline-secondary mb-4">
+        ← Back to Event Details
+      </a>
+
+      <div class="card shadow-lg border-0">
+
+        <!-- Card header with event title and status -->
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">Register for: {{ event.title }}</h3>
+        </div>
+
+        <!-- Alerts / status messages -->
+        {% if event.is_expired %}
+          <div class="alert alert-warning m-4" role="alert">
+            <h5>Registration Closed</h5>
+            <p>The application deadline for this event has passed ({{ event.appl_deadline|date:"d F Y" }}).</p>
+          </div>
+        {% elif event.quota_full and not event.unlimited_quota %}
+          <div class="alert alert-danger m-4" role="alert">
+            <h5>Sorry — This Event is Fully Booked</h5>
+            <p>No more spots are available at this time.</p>
+          </div>
+        {% else %}
+
+          <!-- Main registration form -->
+          <div class="card-body">
+
+            <p class="lead mb-4">
+              Please fill in the details below to secure your spot.
+              {% if event.display_price != "Free" %}
+                <br><strong>Price: {{ event.display_price }}</strong>
+                {% if event.early_bird_fee %}
+                  <small class="text-muted">(Early bird: {{ event.early_bird_fee }} {{ event.fee_currency }})</small>
+                {% endif %}
+              {% endif %}
+            </p>
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                  {{ error }}<br>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+
+              <div class="mb-4">
+                <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                  Email Address <span class="text-danger">*</span>
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.email.errors }}
+                  </div>
+                {% else %}
+                  <div class="form-text">
+                    We'll send confirmation and updates to this email.
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="mb-4">
+                <label for="{{ form.full_name.id_for_label }}" class="form-label fw-bold">
+                  Full Name
+                </label>
+                {{ form.full_name }}
+                {% if form.full_name.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.full_name.errors }}
+                  </div>
+                {% endif %}
+                <div class="form-text">
+                  Optional, but helpful for name badges / communication.
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="{{ form.telephone.id_for_label }}" class="form-label fw-bold">
+                  Telephone Number
+                </label>
+                {{ form.telephone }}
+                {% if form.telephone.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.telephone.errors }}
+                  </div>
+                {% endif %}
+                <div class="form-text">
+                  Optional contact number for event updates.
+                </div>
+              </div>
+
+              <!-- Add more fields here if you extend the form later -->
+              <!-- e.g. organization, dietary requirements, etc. -->
+
+              <div class="d-grid gap-2 mt-5">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Confirm Registration
+                </button>
+              </div>
+
+              <div class="text-center mt-4">
+                <small class="text-muted">
+                  By registering, you agree to the event terms and our 
+                  <a href="#">privacy policy</a>.
+                </small>
+              </div>
+
+            </form>
+
+          </div><!-- card-body -->
+
+        {% endif %}
+
+        <!-- Event summary sidebar-like footer -->
+        <div class="card-footer bg-light small">
+          <div class="row text-center">
+            <div class="col-4">
+              <strong>Date:</strong><br>
+              {% if event.start_date %}{{ event.start_date|date:"d M Y" }}{% else %}TBA{% endif %}
+            </div>
+            <div class="col-4">
+              <strong>Location:</strong><br>
+              {{ event.location|default:"To be announced" }}
+            </div>
+            <div class="col-4">
+              <strong>Spots:</strong><br>
+              {% if event.unlimited_quota %}
+                Unlimited
+              {% elif event.quota_full %}
+                <span class="text-danger">0 left</span>
+              {% else %}
+                {{ event.quota_left }} left
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+      </div><!-- card -->
+
+    </div><!-- col -->
+  </div><!-- row -->
+</div><!-- container -->
+
+{% endblock %}

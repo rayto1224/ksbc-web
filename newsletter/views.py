@@ -7,7 +7,7 @@ class NewsletterArchiveView(ListView):
     model = Newsletter
     template_name = 'newsletter/archive.html'
     context_object_name = 'newsletters'
-    paginate_by = 12
+    paginate_by = 5
 
     def get_queryset(self):
         return Newsletter.objects.filter(is_published=True)

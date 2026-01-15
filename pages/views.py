@@ -22,12 +22,6 @@ def partners(request):
 def giving(request):
     return render(request,'pages/giving.html')
 
-def newsletter(request):
-    return render(request,'pages/newsletter.html')
-
-def activities(request):
-    return render(request,'pages/activities.html')
-
 def schedule(request):
     return render(request,'pages/schedule.html')
 
