@@ -5,6 +5,18 @@
 {% block title %} | 團契小組 {% endblock %}
 <!-- about main content -->
 {% block content %}
+<!-- showcase -->
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h3 class="display-4">團契小組</h3>
+        <p class="lead">聚會時間表</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
   <head>
@@ -17,6 +29,27 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"
     />
+    <style>
+      .card-header {
+        background-color: #20866b;
+        color: white;
+      }
+      .list-group-item.active {
+        background-color: #20866b;
+        border-color: #20866b;
+        color: white;
+      }
+      .list-group-item {
+        background-color: #cdefe6;
+        border-color: #20866b;
+        color: rgb(56, 56, 56);
+      }
+      /* Ensure text remains readable on hover if not active */
+      .list-group-item:hover:not(.active) {
+        background-color: #f8f9fa;
+        color: #20866b;
+      }
+    </style>
   </head>
   <body>
     <div class="container py-4">
@@ -32,7 +65,8 @@
                 <div class="col-3"><h5>日期</h5></div>
                 <div class="col-3"><h5>時間</h5></div>
                 <div class="col-2"><h5>地點</h5></div>
-                </div></div>
+              </div>
+            </div>
             <div class="list-group list-group-flush" id="meetingList">
               {% for e in events %}
               <button
@@ -57,9 +91,7 @@
         </div>
 
         <div class="col-12">
-          <div id="posterArea">
-            
-          </div>
+          <div id="posterArea"></div>
         </div>
       </div>
     </div>
