@@ -11,7 +11,7 @@ def login(request):
         if user is not None:
             auth.login(request,user)
             messages.success(request,'You are logged in.')
-            return redirect('pages:index')
+            return redirect('activities:dashboard')
         else:
             messages.error(request,'Invalid credentials')
             return redirect('accounts:login')
@@ -21,7 +21,7 @@ def login(request):
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('pages:index')
+        return redirect('activities:list')
     
 
 def register(request):
@@ -50,4 +50,3 @@ def register(request):
             return redirect("accounts:register")
     else:
         return render(request,'accounts/register.html')
-

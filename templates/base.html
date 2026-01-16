@@ -13,12 +13,11 @@
     <Link rel="stylesheet" href={% static "css/lightbox.min.css" %}/>
     <!-- Custom -->
     <link rel="stylesheet" href={% static "css/style.css" %}/>
-
-    <title>Ka Shing Baptist Church {% block title %}{% endblock %}</title>
+    <title>嘉盛浸信會</title>
   </head>
   <body>
-    {% include 'partials/_topbar.html' %}
-    {% include 'partials/_navbar.html' %}
+    {% include 'partials/_navbar1.html' %}
+    {% include 'partials/_alert.html' %} 
     {% block content %}{% endblock %}
     {% include 'partials/_footer.html' %}
     <script src={% static "js/jquery-3.3.1.min.js" %}></script>
