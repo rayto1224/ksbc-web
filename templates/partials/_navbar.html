@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <div class="container">
-    <a class="navbar-brand" href={% url 'pages:index' %}>
+    <a class="navbar-brand" href={% url 'activities:list' %}>
           <img src={% static "img/kslogo.png" %} class="logo" alt="" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
@@ -33,37 +33,26 @@
 
         <!-- worship -->
         <li {% if '/worship/' == request.path %} class="nav-item active mr-4" {% else %} class="nav-item mr-4" {% endif %}>
-        <a class="nav-link" href="{% url 'pages:worship' %}">崇拜</a>
+        <a class="nav-link" href="{% url 'worships:worship' %}">崇拜</a>
         </li>
 
         <!-- fellowship -->
         <li {% if '/fellowship/' == request.path %} class="nav-item active mr-4" {% else %} class="nav-item mr-4" {% endif %}>
-        <a class="nav-link" href="{% url 'pages:fellowship' %}">團契小組</a>
+        <a class="nav-link" href="{% url 'fellowship:fellowship' %}">團契小組</a>
         </li>
 
-        <!-- news group -->
-        <li class="nav-item dropdown mr-4">
-          <a class="nav-link dropdown-toggle {% if 'news' in request.path %}active{% endif %}" 
-             href="#" 
-             id="newsDropdown" 
-             role="button" 
-             data-toggle="dropdown" 
-             aria-expanded="false">
-            最新消息
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="newsDropdown">
-            <li><a class="dropdown-item" href="{% url 'pages:schedule' %}">本週崇拜程序表</a></li>
-            <li><a class="dropdown-item" href="{% url 'pages:newsletter' %}">本月牧者心聲</a></li>
-            <li><a class="dropdown-item" href="{% url 'pages:activities' %}">近期活動</a></li>
-          </ul>
+        <!-- newsletter -->
+        <li {% if '/newsletter/' == request.path %} class="nav-item active mr-4" {% else %} class="nav-item mr-4" {% endif %}>
+        <a class="nav-link" href="{% url 'newsletter:archive' %}">牧者心聲</a>
         </li>
 
       </ul>
 
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-            <li {%if 'about' in request.path %} class="nav-item mr-4 active" {% else %} class="nav-item mr-4" {% endif %}>
-              <a class="nav-link" href="{% url 'pages:index' %}"> 您好！ {{user.first_name}} </a>
+            <li class="nav-item mr-3"> 您好！{{user.first_name}}</li>
+            <li {%if 'about' in request.path %} class="nav-item mr-3 active" {% else %} class="nav-item mr-3" {% endif %}>
+              <a class="nav-link" href="{% url 'activities:dashboard' %}"> 我的活動 </a>
             </li>
             <!-- logout -->
              <li class="nav-item mr-3">
