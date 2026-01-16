@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages.apps.PagesConfig',
+    'worships.apps.WorshipsConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -83,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'church',
         'USER': 'postgres',
-        'PASSWORD': '0070',
+        'PASSWORD': '1234',
         'HOST': 'localhost'
     }
 }

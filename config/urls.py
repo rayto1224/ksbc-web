@@ -19,8 +19,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('',include('pages.urls',namespace='pages')),
+    path('worships/',include('worships.urls', namespace='worships')),
     path('accounts/',include('accounts.urls',namespace='accounts')),
     path('admin/', admin.site.urls),
+    
 ]
 
 admin.site.site_header = "KSBC Administration"
