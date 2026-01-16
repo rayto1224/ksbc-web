@@ -16,14 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('',include('pages.urls',namespace='pages')),
+    path('',include('activities.urls',namespace='activities')),
+    path('pages/',include('pages.urls',namespace='pages')),
+    path('newsletter/',include('newsletter.urls',namespace='newsletter')),
     path('worships/',include('worships.urls', namespace='worships')),
     path('accounts/',include('accounts.urls',namespace='accounts')),
     path('admin/', admin.site.urls),
-    
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 admin.site.site_header = "KSBC Administration"
 admin.site.site_title = "KSBC Admin Portal"

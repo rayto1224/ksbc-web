@@ -13,16 +13,15 @@
     <!--- Lightbox -->
     <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}" />
     <!-- Custom -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    <title>Ka Shing Baptist Church {% block title %}{% endblock %}</title>
-    
-    {% block extra_css %}{% endblock %}  <!-- Optional: for page-specific CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href={% static "css/style.css" %}/>
+    <title>嘉盛浸信會</title>
   </head>
   <body>
-    {% include 'partials/_topbar.html' %}
-    {% include 'partials/_navbar.html' %}
-    
+    {% include 'partials/_navbar1.html' %}
+    {% include 'partials/_alert.html' %} 
+
     {% block content %}{% endblock %}
     
     {% include 'partials/_footer.html' %}

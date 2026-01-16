@@ -1,4 +1,99 @@
-<footer id="main-footer" class="py-4 bg-primary text-center">
-    Copyright &copy;
-    <span class="year"></span> Ka Shing Baptist Church. All Rights Reserved.
+{% load static %}
+<footer id="main-footer" class="pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <!-- Column 1: Church Info -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="footer-slogan mb-4">
+                    <img src="{% static 'img/slogan.jpg' %}" alt="Ka Shing Baptist Church Slogan" class="footer-slogan-img img-fluid">
+                </div>
+                <p class="text-muted">
+                    Ka Shing Baptist Church is a community of faith dedicated to worship, fellowship, and service.
+                </p>
+                <div class="social mt-4">
+                    <a href="#" class="text-decoration-none me-3">
+                        <i class="fab fa-facebook fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-decoration-none me-3">
+                        <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-decoration-none me-3">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-decoration-none">
+                        <i class="fab fa-youtube fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="fw-bold mb-4">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{% url 'pages:index' %}" class="text-decoration-none text-muted">Home</a></li>
+                    <li class="mb-2"><a href="{% url 'pages:about' %}" class="text-decoration-none text-muted">About Us</a></li>
+                    <li class="mb-2"><a href="{% url 'pages:faith' %}" class="text-decoration-none text-muted">Our Faith</a></li>
+                    <li class="mb-2"><a href="{% url 'pages:schedule' %}" class="text-decoration-none text-muted">Schedule</a></li>
+                    <li class="mb-2"><a href="{% url 'pages:contact' %}" class="text-decoration-none text-muted">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact Info -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="fw-bold mb-4">Contact Us</h5>
+                <ul class="list-unstyled text-muted">
+                    <li class="mb-3">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <span>123 Church Street, Hong Kong</span>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-phone me-2"></i>
+                        <span>(852) 2676-7978</span>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-envelope me-2"></i>
+                        <span>contact@ksbaptist-hk.org</span>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-clock me-2"></i>
+                        <span>Sunday Service: 10:00 AM</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="fw-bold mb-4">Stay Updated</h5>
+                <p class="text-muted">Subscribe to our newsletter for the latest updates and events.</p>
+                <a href="{% url 'newsletter:archive' %}" class="btn btn-outline-dark btn-sm">View Newsletters</a>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="footer-copyright text-muted">
+                    Copyright &copy; <span class="year"></span> Ka Shing Baptist Church. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
+
+<style>
+    #main-footer {
+        background-color: #CCFFEB;
+        color: #333;
+    }
+    #main-footer a.text-muted:hover {
+        color: #0d6efd !important;
+    }
+    .social a {
+        color: #555;
+        transition: color 0.3s;
+    }
+    .social a:hover {
+        color: #0d6efd;
+    }
+</style>
