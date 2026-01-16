@@ -12,6 +12,6 @@ urlpatterns = [
     path('partners/',views.partners,name='partners'),
     path('giving/',views.giving,name='giving'),
     path('schedule/',views.schedule,name='schedule'),
-    path('worship/',views.worship,name='worship'),
+    #path('worship/',views.worship,name='worship'),
     path('fellowship/',views.fellowship,name='fellowship'),
 ]
