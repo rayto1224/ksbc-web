@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pages.apps.PagesConfig",
+    "fellowship",
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,6 @@ MESSAGE_TAGS = {
     messages.ERROR: "danger",
     messages.SUCCESS: "success",
 }
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+<!-- load static -->
+{% load static %}
+<!-- about title -->
+{% block title %} | 團契小組 {% endblock %}
+<!-- about main content -->
+{% block content %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container py-4">
+      <div class="alert alert-secondary mb-0">
+        請點擊聚會項目，下方會顯示活動內容與 Poster。
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header font-weight-bold">
+              <div class="row">
+                <div class="col-4"><h5>聚會/小組名稱</h5></div>
+                <div class="col-3"><h5>日期</h5></div>
+                <div class="col-3"><h5>時間</h5></div>
+                <div class="col-2"><h5>地點</h5></div>
+                </div></div>
+            <div class="list-group list-group-flush" id="meetingList">
+              {% for e in events %}
+              <button
+                class="list-group-item list-group-item-action"
+                data-title="{{ e.title|escape }}"
+                data-date="{{ e.date_text|escape }}"
+                data-time="{{ e.time_text|escape }}"
+                data-location="{{ e.location|escape }}"
+                data-desc="{{ e.description|escape }}"
+                data-poster="{% if e.poster %}{{ e.poster.url }}{% else %}https://picsum.photos/800/450{% endif %}"
+              >
+                <div class="row">
+                  <div class="col-4">{{ e.title|escape }}</div>
+                  <div class="col-3">{{ e.date_text|escape }}</div>
+                  <div class="col-3">{{ e.time_text|escape }}</div>
+                  <div class="col-2">{{ e.location|escape }}</div>
+                </div>
+              </button>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div id="posterArea">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const meetingList = document.getElementById("meetingList");
+      const posterArea = document.getElementById("posterArea");
+
+      meetingList.addEventListener("click", function (e) {
+        const item = e.target.closest(".list-group-item");
+        if (!item) return;
+
+        document
+          .querySelectorAll("#meetingList .list-group-item")
+          .forEach((el) => el.classList.remove("active"));
+        item.classList.add("active");
+
+        const title = item.dataset.title || "";
+        const date = item.dataset.date || "";
+        const time = item.dataset.time || "";
+        const location = item.dataset.location || "";
+        const desc = item.dataset.desc || "";
+        const poster = item.dataset.poster || "";
+
+        posterArea.innerHTML = `
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${title}</h5>
+          <ul class="list-unstyled text-muted mb-2">
+            <li>📅 日期：${date}</li>
+            <li>⏰ 時間：${time}</li>
+            <li>📍 地點：${location}</li>
+          </ul>
+          ${desc ? `<p class="mb-0">${desc}</p>` : ``}
+        </div>
+        <img src="${poster}" class="card-img-top" style="max-height:1450px; object-fit:cover;" alt="${title}">
+      </div>
+    `;
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

@@ -34,5 +34,4 @@ def schedule(request):
 def worship(request):
     return render(request,'pages/worship.html') 
 
-def fellowship(request):
-    return render(request,'pages/fellowship.html')
+
