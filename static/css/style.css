@@ -125,3 +125,110 @@ img {
     font-size: 30px; }
   #showcase-inner h1 {
     font-size: 40px; } }
+
+/* Event registration form alignment */
+.event-registration-form .form-control {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  display: block;
+}
+
+.event-registration-form .form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #265eb8;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(16, 40, 78, 0.25);
+}
+
+.event-registration-form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.event-registration-form .mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Ensure consistent alignment of form elements */
+.event-registration-form .form-group {
+  width: 100%;
+}
+
+/* Center align form within card */
+.card-body .event-registration-form {
+  width: 100%;
+}
+
+/* Improve alignment of form elements */
+.event-registration-form .form-text {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #6c757d;
+}
+
+/* Ensure error messages are properly aligned */
+.event-registration-form .text-danger.small {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Make sure all form controls have consistent appearance */
+.event-registration-form input[type="email"],
+.event-registration-form input[type="text"],
+.event-registration-form input[type="tel"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Additional alignment improvements */
+.event-registration-form .form-control {
+  margin-top: 0.25rem;
+}
+
+.event-registration-form .mb-4 > .form-text,
+.event-registration-form .mb-4 > .text-danger.small {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Ensure form is properly centered and aligned */
+.card .card-body .event-registration-form {
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .event-registration-form .form-control {
+    font-size: 16px; /* Prevent zoom on mobile */
+  }
+  
+  .event-registration-form .card-body {
+    padding: 1rem;
+  }
+  
+  .event-registration-form .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .event-registration-form .form-label {
+    font-size: 0.95rem;
+  }
+  
+  .event-registration-form .form-control {
+    padding: 0.5rem 0.75rem;
+  }
+}

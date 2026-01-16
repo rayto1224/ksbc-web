@@ -140,7 +140,6 @@ class EventRegistrationCreateView(CreateView):
             send_mail(
                 subject=subject,
                 message=plain_message,
-                from_email=None,  # Uses DEFAULT_FROM_EMAIL from settings
                 recipient_list=[participant.email],
                 html_message=html_message,
                 fail_silently=False,
