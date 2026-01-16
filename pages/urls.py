@@ -4,7 +4,6 @@ from . import views
 app_name = 'pages'
 
 urlpatterns = [
-    path('',views.index,name='index'),
     path('about/',views.about,name='about'),
     path('contact/',views.contact,name='contact'),
     path('faith/',views.faith,name='faith'),
@@ -12,6 +11,4 @@ urlpatterns = [
     path('partners/',views.partners,name='partners'),
     path('giving/',views.giving,name='giving'),
     path('schedule/',views.schedule,name='schedule'),
-    #path('worship/',views.worship,name='worship'),
-    path('fellowship/',views.fellowship,name='fellowship'),
 ]
