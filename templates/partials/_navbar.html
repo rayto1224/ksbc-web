@@ -50,8 +50,7 @@
 
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-            <li class="nav-item mr-3"> 您好！{{user.first_name}}</li>
-            <li {%if 'about' in request.path %} class="nav-item mr-3 active" {% else %} class="nav-item mr-3" {% endif %}>
+            <li {%if 'dashboard' in request.path %} class="nav-item mr-3 active" {% else %} class="nav-item mr-3" {% endif %}>
               <a class="nav-link" href="{% url 'activities:dashboard' %}"> 我的活動 </a>
             </li>
             <!-- logout -->
