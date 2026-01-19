@@ -20,8 +20,8 @@ def partners(request):
 def giving(request):
     return render(request,'pages/giving.html')
 
-def schedule(request):
-    return render(request,'pages/schedule.html')
+def index(request):
+    return render(request,'pages/index.html')
 
 
 

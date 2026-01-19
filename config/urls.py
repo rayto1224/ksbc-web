@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('',include('activities.urls',namespace='activities')),
-    path('pages/',include('pages.urls',namespace='pages')),
+    path('activities/',include('activities.urls',namespace='activities')),
+    path('',include('pages.urls',namespace='pages')),
     path("fellowship/", include("fellowship.urls", namespace="fellowship")),
     path('newsletter/',include('newsletter.urls',namespace='newsletter')),
     path('worships/',include('worships.urls', namespace='worships')),

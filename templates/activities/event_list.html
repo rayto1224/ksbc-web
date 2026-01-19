@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% block title %} | 活動一覽 {% endblock %}
 {% block content %}
+{% include "includes/_topbar.html" with title="活動一覽" %}
 
 <div class="container my-5">
-  <h1 class="mb-4">活動一覽</h1>
 
   {% if not events %}
-    <p class="text-muted">No upcoming events at the moment.</p>
+    <p class="text-muted">最近沒有活動</p>
   {% else %}
 
   <div class="row row-cols-1 row-cols-md-4 g-4">

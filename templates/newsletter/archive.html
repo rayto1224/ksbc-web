@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-{% block title %}牧者心聲{% endblock %}
-
+{% block title %} | 牧者心聲{% endblock %}
 {% block content %}
+{% include "includes/_topbar.html" with title="牧者心聲" subtitle="耶和華是我的牧者，我必不至缺乏。" %}
 
-<div class="container py-5">
-  <div class="text-center mb-5">
-    <h1 class="display-4 fw-bold text-dark">牧者心聲</h1>
-<p class="lead text-muted mx-auto" style="max-width: 600px;">耶和華是我的牧者，我必不至缺乏。</p>
-  </div>
+<section class="py-4">
+  <div class="container">
+
 
   {% if newsletters %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -29,9 +27,7 @@
               </div>
 
               <h5 class="card-title fw-semibold text-dark mb-3">
-                <a href="{{ newsletter.get_absolute_url }}" class="text-decoration-none text-dark hover-text-primary">
-                  {{ newsletter.title }}
-                </a>
+                {{ newsletter.title }}
               </h5>
 
               {% if newsletter.description %}
@@ -69,7 +65,8 @@
     </div>
   {% endif %}
 </div>
-
+</div>
+</section>
 <style>
   .hover-shadow-lg:hover {
     box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;

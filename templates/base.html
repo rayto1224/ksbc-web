@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <link rel="stylesheet" href={% static "css/style.css" %}/>
-    <title>嘉盛浸信會</title>
+    <title>嘉盛浸信會{% block title %}{% endblock %}</title>
   </head>
   <body>
     {% include 'partials/_navbar.html' %}

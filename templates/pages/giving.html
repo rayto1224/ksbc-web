@@ -9,17 +9,21 @@
     />
     
 {% extends "base.html" %}
+<!-- load static -->
+{% load static %}
+<!-- about title -->
+{% block title %} | 認識我們  {% endblock %}
+<!-- about main content -->
 {% block content %}
+{% include "includes/_topbar.html" with title="奉獻方法" subtitle="少種的少收；多種的多收。各人要隨心所願，不要為難，不要勉強，因為神愛樂捐的人。（哥林多後書9:6-7）" %}
+
+
 
 <div class="container mt-4 mb-5">
-<h3>奉獻方法</h3>
-
-
-<h5>少種的少收；多種的多收。各人要隨心所願，不要為難，不要勉強，因為神愛樂捐的人。（哥林多後書9:6-7）</h5>
 
 </br>
 
-<h3 class="pb-5 text-info">支票：抬頭「嘉盛浸信會有限公司」或 
+<h3 class="pb-5 text-info" style:"margin: 50px">支票：抬頭「嘉盛浸信會有限公司」或 
 
 英文「Ka Shing Baptist Church Ltd.」</br>
 
@@ -29,7 +33,5 @@
 
 <h3 class="pb-5 text-black">(存入款項後，請通知辦公室） </h3>
 
-</div>
-</div>
 </div>
 {% endblock %}
