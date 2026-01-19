@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}牧者心聲{% endblock %}
+{% block title %} | 牧者心聲{% endblock %}
 {% block content %}
 {% include "includes/_topbar.html" with title="牧者心聲" subtitle="耶和華是我的牧者，我必不至缺乏。" %}
 
@@ -27,9 +27,7 @@
               </div>
 
               <h5 class="card-title fw-semibold text-dark mb-3">
-                <a href="{{ newsletter.get_absolute_url }}" class="text-decoration-none text-dark hover-text-primary">
-                  {{ newsletter.title }}
-                </a>
+                {{ newsletter.title }}
               </h5>
 
               {% if newsletter.description %}

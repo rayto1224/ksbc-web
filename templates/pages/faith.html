@@ -5,30 +5,20 @@
 {% block title %} | 認識我們  {% endblock %}
 <!-- about main content -->
 {% block content %}
-<!-- showcase -->
-<section id="showcase-inner" class="py-5 text-white">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <h3 class="display-4">我們的信仰</h3>
-        <p class="lead">使徒信經</p>
-      </div>
-    </div>
-  </div>
-</section>
+
+{% include "includes/_topbar.html" with title="我們的信仰" subtitle="使徒信經" %}
 
 </br>
-<div class="h3 text-info mt-1 mb-3"style="margin:500px" >
 
-我信上帝，全能的父、創造天地的主。
-
-我信我主耶穌基督，上帝的獨生子；因聖靈感孕，由童貞女馬利亞所生，在本丟彼拉多手下受難，被釘於十字架上，受死，埋葬；降在陰間，第三天從 死人中復活；升天，坐在全能父上帝的右邊；將來必從那裏降臨，審判活人死人。
-
-我信聖靈；我信聖而公之教會；我信聖徒相通；我信罪得赦免；我信身體復活；我信永生。阿們。
-
-
-</p>
+<section class="text-info text-left">
+  <div class="container" style="font-size: 2em;">
+<p>我信上帝，全能的父、創造天地的主。</p>
+<br/>
+<p>我信我主耶穌基督，上帝的獨生子；因聖靈感孕，由童貞女馬利亞所生，在本丟彼拉多手下受難，被釘於十字架上，受死，埋葬；降在陰間，第三天從 死人中復活；升天，坐在全能父上帝的右邊；將來必從那裏降臨，審判活人死人。</p>
+<br/>
+<p>我信聖靈；我信聖而公之教會；我信聖徒相通；我信罪得赦免；我信身體復活；我信永生。阿們。</p>
+</div>
 </section>
-</div>
-</div>
+
+
 {% endblock %}

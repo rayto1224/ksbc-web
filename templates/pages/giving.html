@@ -15,17 +15,9 @@
 {% block title %} | 認識我們  {% endblock %}
 <!-- about main content -->
 {% block content %}
-<!-- showcase -->
-<section id="showcase-inner" class="py-5 text-white">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <h3 class="display-4">奉獻方法</h3>
-        <p class="lead">少種的少收；多種的多收。各人要隨心所願，不要為難，不要勉強，因為神愛樂捐的人。（哥林多後書9:6-7）</p>
-      </div>
-    </div>
-  </div>
-</section>
+{% include "includes/_topbar.html" with title="奉獻方法" subtitle="少種的少收；多種的多收。各人要隨心所願，不要為難，不要勉強，因為神愛樂捐的人。（哥林多後書9:6-7）" %}
+
+
 
 <div class="container mt-4 mb-5">
 
@@ -41,7 +33,5 @@
 
 <h3 class="pb-5 text-black">(存入款項後，請通知辦公室） </h3>
 
-</div>
-</div>
 </div>
 {% endblock %}
