@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Test 5 (Short timeout)</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        #showcase-inner {
+            background: #333;
+            color: white;
+        }
+    </style>
+    <script>
+        // Override setTimeout to shorten the 5000ms delay to 500ms for testing
+        var originalSetTimeout = window.setTimeout;
+        window.setTimeout = function(callback, delay) {
+            if (delay === 5000) {
+                return originalSetTimeout(callback, 500);
+            }
+            return originalSetTimeout(callback, delay);
+        };
+    </script>
+</head>
+<body>
+    <!-- Simulate topbar with alert -->
+    <section id="showcase-inner" class="py-3 text-white">
+        <div class="container">
+            <!-- Alert messages -->
+            <div class="container message">
+                <div class="alert alert-dismissible text-center alert-success" role="alert">
+                    <button class="close" type="button" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Success:</strong> This is a test message.
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 class="display-4">Test Title</h3>
+                    <p class="lead mx-auto" style="max-width: 600px;">
+                        Test subtitle.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
