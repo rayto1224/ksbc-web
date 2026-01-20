@@ -1,7 +1,7 @@
 {% if messages %}
 {% for message in messages %}
 <div class="container" id="message">
-    <div class="alert alert-dismissible text-center alert-{{message.tags}}" role="alert">
+    <div class="alerty alert-dismissible text-center alert-{{message.tags}}" role="alert">
     <button class="close" type="button" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -10,15 +10,4 @@
     </div>
 </div>
 {% endfor %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Auto-dismiss alerts after 3 seconds
-        setTimeout(function() {
-            var closeButtons = document.querySelectorAll('.alert .close');
-            closeButtons.forEach(function(btn) {
-                btn.click();
-            });
-        }, 8000);
-    });
-</script>
 {% endif %}

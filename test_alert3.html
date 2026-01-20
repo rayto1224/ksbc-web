@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Test 3</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <style>
+        .message { margin: 20px; }
+    </style>
+    <script>
+        // Override the setTimeout for testing
+        window.setTimeout = function(callback, delay) {
+            if (delay === 5000) {
+                // call immediately for testing
+                return setTimeout(callback, 500);
+            }
+            return setTimeout(callback, delay);
+        };
+    </script>
+</head>
+<body>
+    <div class="container message">
+        <div class="alert alert-success" role="alert">
+            <strong>Success:</strong> This is a test message.
+        </div>
+    </div>
+
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
