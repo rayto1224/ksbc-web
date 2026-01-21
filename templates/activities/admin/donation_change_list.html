@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %} {% load i18n %}
+<!-- load block -->
+{% block object-tools-items %}
+<li>
+  <a href="{% url 'admin:donation_summary' %}" class="addlink">
+    View Financial Year Summary
+  </a>
+</li>
+{{ block.super }} {% endblock %}

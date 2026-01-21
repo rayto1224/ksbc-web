@@ -1,7 +1,10 @@
-# events/admin.py
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Event, EventParticipant
+from django.urls import path
+from django.shortcuts import render
+from django.db.models import Sum, F
+from django.utils import timezone
+from .models import Event, EventParticipant, Donation
 
 
 @admin.register(Event)
@@ -151,3 +154,100 @@ class EventParticipantAdmin(admin.ModelAdmin):
         }.get(status, "#6c757d")
         return format_html('<span style="color:{};">{}</span>', color, status)
     registration_status_colored.short_description = "Status"
+
+
+@admin.register(Donation)
+class DonationAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'amount',
+        'date',
+        'created_at',
+    )
+    search_fields = (
+        'user__username',
+        'user__email',
+        'notes',
+    )
+    list_filter = (
+        'date',
+        'created_at',
+    )
+    date_hierarchy = 'date'
+    ordering = ('-date', '-created_at')
+    raw_id_fields = ('user',)
+    change_list_template = "activities/admin/donation_change_list.html"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('summary/', self.admin_site.admin_view(self.summary_view), name='donation_summary'),
+        ]
+        return custom_urls + urls
+
+    def summary_view(self, request):
+        # Calculate financial year for each donation and aggregate
+        # Since logic is complex for FY, we can fetch all and process in python or use complex annotations.
+        # Python processing is easier for 'Apr-Mar' year logic unless dataset is huge.
+        
+        donations = Donation.objects.select_related('user').order_by('user__username', '-date')
+        
+        # Structure: { (user, fy_string): {'total': 0.0, 'donations': []} }
+        from collections import defaultdict
+        # Helper to create default dict entry
+        def default_entry():
+            return {'total': 0.0, 'donations': []}
+            
+        data = defaultdict(default_entry)
+        fy_totals = defaultdict(float)
+        
+        for d in donations:
+            if d.date.month >= 4:
+                fy = f"{d.date.year}-{d.date.year + 1}"
+            else:
+                fy = f"{d.date.year - 1}-{d.date.year}"
+            
+            key = (d.user, fy)
+            data[key]['total'] += float(d.amount)
+            data[key]['donations'].append(d)
+            fy_totals[fy] += float(d.amount)
+            
+        # Convert to list for template
+        summary_list = []
+        for (user, fy), info in data.items():
+            summary_list.append({
+                'user': user,
+                'fy': fy,
+                'total': info['total'],
+                'donations': info['donations']  # List of donation objects
+            })
+            
+        # FY Totals list sorted by FY desc
+        fy_summary_list = sorted(
+            [{'fy': fy, 'total': total} for fy, total in fy_totals.items()],
+            key=lambda x: x['fy'],
+            reverse=True
+        )
+
+        # Prepare filter options (all available FYs)
+        # Sort headers descending (e.g. 2025-2026, 2024-2025)
+        all_fys = sorted(fy_totals.keys(), reverse=True)
+
+        # Handle Filtering
+        selected_fy = request.GET.get('fy')
+        if selected_fy and selected_fy in all_fys:
+            # Filter the lists
+            summary_list = [item for item in summary_list if item['fy'] == selected_fy]
+            fy_summary_list = [item for item in fy_summary_list if item['fy'] == selected_fy]
+
+        context = dict(
+           self.admin_site.each_context(request),
+           summary_list=summary_list,
+           fy_summary_list=fy_summary_list,
+           all_fys=all_fys,
+           selected_fy=selected_fy,
+           title="Donation Summary (Financial Year)"
+        )
+        return render(request, "activities/admin/donation_summary.html", context)
+
+
