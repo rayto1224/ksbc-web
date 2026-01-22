@@ -26,7 +26,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'activities:list' %}">
+          <a href="{% url 'indexes:home' %}">
             <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb-item active">崇拜講道</li>
@@ -49,6 +49,15 @@
         <option value="{{ year }}">{{ year }}年</option>
         {% endfor %}
       </select>
+
+      <label for="speaker_name-selector" class="filter-label">篩選講員：</label>
+      <select id="speaker_name-selector" onchange="filterSermons()" class="form-control form-control-sm" style="width: auto; display: inline-block;">
+        <option value="">所有講員</option>
+        {% for speaker_name in speaker_names %}
+        <option value="{{ speaker_name }}">{{ speaker_name }}</option>
+        {% endfor %}
+      </select>
+
     </div>
     
     <!-- 講道列表 -->
@@ -72,7 +81,7 @@
               <td>
                 <a href="{{ sermon.youtube_link }}" 
                    target="_blank" 
-                   class="btn btn-sm btn-primary">
+                   class="btn btn-sm btn-danger">
                   <i class="fas fa-play-circle"></i> 觀看
                 </a>
               </td>
@@ -198,7 +207,7 @@ function displaySermons(sermons) {
                 <td>
                     <a href="${sermon.youtube_link}" 
                        target="_blank" 
-                       class="btn btn-sm btn-primary">
+                       class="btn btn-sm btn-danger">
                         <i class="fas fa-play-circle"></i> 觀看
                     </a>
                 </td>

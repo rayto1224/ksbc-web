@@ -6,6 +6,5 @@ app_name = "indexes"
 
 urlpatterns = [
     path('', views.home_page, name='home'),  # 首页
-    path('<int:ministry_id>/', views.ministry_details, name='ministry')
-
+    path('ministry/<int:ministry_id>/', views.ministry_details, name='ministry'),
 ]

@@ -39,10 +39,11 @@ def test(request):
     return render(request, 'indexes/test.html')
 
 
-def ministry_details(request,ministry_id):
+def ministry_details(request, ministry_id):
     ministry = get_object_or_404(Ministry, pk=ministry_id)
-    context = {"ministry" : ministry}
-    return render(request, 'indexes/ministies.html', context)
+    return render(request, 'indexes/ministries.html', {
+        'ministry': ministry
+    })
 
 
 def recent_ministries(request):

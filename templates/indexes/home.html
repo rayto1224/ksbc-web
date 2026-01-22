@@ -13,8 +13,8 @@
             <div class="col-md-12">
                 <img src="{% static 'img/lords_prayer.png' %}" alt="主禱文">
                 <img src="{% static 'img/slogan.jpg' %}" alt="標語">
-                <h1 class="display-4 mt-5">嘉盛浸信會</h1>
-                <p class="lead">在每一代以生命見證，活出基督的樣式，轉化社區</p>
+                <h1 class="display-4 mt-5"></h1>
+                <p class="lead"></p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
             <!-- 左欄：事工動態 -->
             <div class="col-md-6 d-flex">
                 <div class="card w-100 border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-success text-white">
                         <h4 class="mb-0">
                             <i class="fas fa-hands-helping me-2"></i>事工動態
                         </h4>
@@ -57,7 +57,7 @@
                                         </div>
                                         {% endif %}
                                         <div class="px-2">
-                                            <h6 class="text-primary">
+                                            <h6 class="text-info">
                                                 {{ ministry.activity_date|date:"Y年m月d日" }}
                                                 {% if ministry.location %}
                                                 <small class="text-muted">
@@ -100,7 +100,7 @@
             <!-- 右欄：代禱事項 -->
             <div class="col-md-6 d-flex">
                 <div class="card w-100 border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-success text-white">
                         <h4 class="mb-0">
                             <i class="fas fa-pray me-2"></i>代禱事項
                         </h4>
@@ -118,7 +118,7 @@
                                             </h5>
                                         </div>
                                         {% else %}
-                                        <h5 class="text-primary mb-2 fw-bold">{{ prayer.title }}</h5>
+                                        <h5 class="text-warning mb-2 fw-bold">{{ prayer.title }}</h5>
                                         {% endif %}
                                         
                                         <div class="prayer-content">
