@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'activities.apps.ActivitiesConfig',
     'fellowship.apps.FellowshipConfig',
+    'indexes.apps.IndexesConfig',
 ]
 
 MIDDLEWARE = [

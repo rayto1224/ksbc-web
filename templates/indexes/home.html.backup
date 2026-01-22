@@ -1,11 +1,3 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container mt-4 mb-5">
-<h3>Activities</h3>
-</div>
-{% endblock %}
-
-
 <!-- templates/indexes/home_simple.html -->
 {% extends 'base.html' %}
 {% load static %}
@@ -42,7 +34,7 @@
                     <div class="card-body">
                         {% if recent_ministries %}
                             <!-- 圖片輪播 -->
-                            <div id="ministryCarousel_index" class="carousel slide" data-bs-ride="carousel">
+                            <div id="ministryCarousel" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     {% for ministry in recent_ministries %}
                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -73,11 +65,11 @@
                                 
                                 {% if recent_ministries|length > 1 %}
                                 <button class="carousel-control-prev" type="button" 
-                                        data-bs-target="#ministryCarousel_index" data-bs-slide="prev">
+                                        data-bs-target="#ministryCarousel" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon"></span>
                                 </button>
                                 <button class="carousel-control-next" type="button"
-                                        data-bs-target="#ministryCarousel_index" data-bs-slide="next">
+                                        data-bs-target="#ministryCarousel" data-bs-slide="next">
                                     <span class="carousel-control-next-icon"></span>
                                 </button>
                                 {% endif %}

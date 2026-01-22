@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+<!--1 block start-->
 {% block content %}
 
 <div class="container my-5">
   <h1 class="mb-4">活動一覽</h1>
-
+  <h1 class="mb-4">活動一覽</h1>
+    
   {% if not events %}
     <p class="text-muted">No upcoming events at the moment.</p>
   {% else %}
@@ -93,4 +95,5 @@
   {% endif %}
 </div>
 
+<!--1 block end-->
 {% endblock %}

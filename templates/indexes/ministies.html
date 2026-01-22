@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}test.title {% endblock %}
+<div class="row_text-center">
+{%for ministry in Ministries %}
+    <img src="{{ ministry.image.url }}" 
+    alt="{{ ministry.title }}"
+    class="img-fluid" 
+    style="height: 220px; width: 100%; object-fit: cover;">
+{% endfor %}
+
+</div>
+{% block content %}
+{% endblock %}

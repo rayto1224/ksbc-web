@@ -1,0 +1,111 @@
+<!-- templates/indexes/home_simple.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}嘉盛浸信會 - 首頁{% endblock %}
+
+{% block content %}
+<!-- 顶部欢迎横幅 -->
+<section id="showcase">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+              <img src={% static 'img/lords_prayer.png' %} alt="" />
+              <img src={% static 'img/slogan.jpg' %} alt="" />
+                <h1 class="display-4 mt-5">嘉盛浸信會</h1>
+                <p class="lead">在每一代以生命見證，活出基督的樣式，轉化社區</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 核心信息三栏 -->
+<section id="services" class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <!-- 本堂事工 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-hands-helping fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">本堂事工</h4>
+                        {% if works_by_month %}
+                            {% for month, works in works_by_month.items|slice:":1" %}
+                                <div class="text-start mt-3">
+                                    <h6 class="text-primary">{{ month }}</h6>
+                                    {% for work in works|slice:":2" %}
+                                        <p class="mb-2">
+                                            <strong>{{ work.title }}</strong><br>
+                                            <small class="text-muted">{{ work.work_date|date:"m月d日" }}</small>
+                                        </p>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted mt-3">暫無事工動態</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代祷事项 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-pray fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">代禱事項</h4>
+                        {% if weekly_prayers %}
+                            <div class="text-start mt-3">
+                                <h6 class="text-primary">{{ current_week_str }}</h6>
+                                {% for prayer in weekly_prayers|slice:":2" %}
+                                    <div class="prayer-item mb-3">
+                                        {% if prayer.is_urgent %}
+                                            <span class="badge bg-danger mb-1">緊急</span>
+                                        {% endif %}
+                                        <p class="mb-1">{{ prayer.title }}</p>
+                                        <small class="text-muted">{{ prayer.content|truncatechars:50 }}</small>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted mt-3">暫無代禱事項</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 近期活动 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-alt fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">近期活動</h4>
+                        {% if upcoming_events %}
+                            <div class="text-start mt-3">
+                                {% for event in upcoming_events|slice:":2" %}
+                                    <div class="event-item mb-3">
+                                        <p class="mb-1">
+                                            <strong>{{ event.title }}</strong><br>
+                                            <small class="text-muted">
+                                                {{ event.start_date|date:"m月d日 H:i" }}
+                                                {% if event.location %}
+                                                    · {{ event.location }}
+                                                {% endif %}
+                                            </small>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted mt-3">暫無活動安排</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</script>
+{% endblock %}

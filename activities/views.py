@@ -201,3 +201,6 @@ class WithdrawRegistrationView(LoginRequiredMixin, View):
             messages.success(request, f"Successfully withdrawn from '{reg.event.title}'.")
         
         return redirect('activities:dashboard')
+
+def test(request):
+    return render(request,'activities/test.html')

@@ -9,4 +9,7 @@ urlpatterns = [
     path('<int:event_id>/register/', views.EventRegistrationCreateView.as_view(), name='register'),
     path('dashboard/', views.UserDashboardView.as_view(), name='dashboard'),
     path('withdraw/<int:registration_id>/', views.WithdrawRegistrationView.as_view(), name='withdraw'),
+    # for testing -> test.html
+    path('test/',views.test,name='test'),
+
 ]
