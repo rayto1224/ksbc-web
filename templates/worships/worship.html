@@ -1,114 +1,316 @@
 {% extends "base.html" %}
+
+<!-- load static -->
+{% load static %}
 {% block title %}崇拜講道{% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-  <div class="container text-center">
-    <h3 class="display-4">崇拜講道</h3>
-    <p class="lead">聚會重温</p>
-  </div>
-</section>
-
-<section id="bc" class="mt-3">
+<section class="py-5">
   <div class="container">
-    <nav aria-label="breadcrumb">
+    <!--  
+     Breadcrumb 
+    <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'indexes:home' %}"><i class="fas fa-home"></i> Home</a>
+          <a href="{% url 'indexes:home' %}"><i class="fas fa-home"></i> 首頁</a>
         </li>
         <li class="breadcrumb-item active">崇拜講道</li>
       </ol>
-    </nav>
-  </div>
-</section>
+    </nav> 
+    -->
+    
 
-<section id="listings" class="py-4">
-  <div class="container">
-    <h3>講道重溫</h3>
+        <!-- showcase -->
+    <section id="showcase-inner" class="py-5 text-white">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-12">
+            <h3 class="display-4">崇拜講道</h3>
+            <p class="lead">聚會重温</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-auto">
+        <span class="badge bg-primary fs-6" id="sermon-counter">
+          共 {{ total_sermons }} 篇講道
+        </span>
+      </div>
+    </div>
 
     <!-- Filters -->
-    <div class="filter-section mb-3">
-      <label for="year-selector">篩選日期：</label>
-          <select id="year-selector" onchange="filterSermons()">
-          <option value="">所有日期</option>
-          {% for year in years %}
-          <option value="{{ year }}">{{ year }}年</option>
-          {% endfor %}
-      </select>
-
-        <label for="year-selector">篩選講員：</label>
-          <select id="speaker_name-selector" onchange="filterSermons()">
-        <option value="">所有講員</option>
-        {% for speaker_name in speaker_names %}
-        <option value="{{ speaker_name }}">{{ speaker_name }}</option>
-        {% endfor %}
-    </select>
+    <div class="card shadow-sm mb-0">
+      <div class="card-header bg-#b0e5d0">
+        <h5 class="mb-0"><i class="fas fa-filter me-3"></i>篩選講道</h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-lg-3">
+            <label for="year-filter" class="form-label">
+              <i class="fas fa-calendar-alt me-1"></i>年份
+            </label>
+            <select id="year-filter" class="form-select form-select-lg">
+              <option value="">所有年份</option>
+              {% for year in years %}
+                <option value="{{ year }}">{{ year }} 年</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <label for="speaker-filter" class="form-label">
+              <i class="fas fa-user me-1"></i>講員
+            </label>
+            <select id="speaker-filter" class="form-select form-select-lg">
+              <option value="">所有講員</option>
+              {% for speaker in speakers %}
+                <option value="{{ speaker }}">{{ speaker }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex justify-content-end mt-2">
+              <button class="btn btn-outline-secondary" onclick="clearFilters()">
+                <i class="fas fa-times me-1"></i>清除篩選
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Sermons Table -->
+    <style>
+      .card-header {
+        background-color: #20866b;
+        color: white;
+      }
+      .list-group-item.active {
+        background-color: #20866b;
+        border-color: #20866b;
+        color: white;
+      }
+      .list-group-item {
+        background-color: #cdefe6;
+        border-color: #20866b;
+        color: rgb(56, 56, 56);
+      }
+      /* Ensure text remains readable on hover if not active */
+      .list-group-item:hover:not(.active) {
+        background-color: #f8f9fa;
+        color: #20866b;
+      }
+    </style> 
     <div class="table-responsive">
-      <table id="sermons-table" class="table table-hover table-striped">
-        <thead>
+      <table class="table table-hover table-striped align-middle" id="sermons-table">
+        <thead class="card-header">
           <tr>
-            <th>講道日期</th>
-            <th>講道題目</th>
-            <th>講員</th>
-            <th>影片</th>
+            <th width="15%">日期</th>
+            <th width="50%">講道題目</th>
+            <th width="15%">講員</th>
+            <th width="20%">操作</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {% for sermon in sermons %}
+          <tr data-year="{{ sermon.sermon_date.year }}" data-speaker="{{ sermon.speaker_name }}">
+            <td>
+              <div class="text-nowrap">{{ sermon.sermon_date|date:"Y-m-d" }}</div>
+              <small class="text-muted">{{ sermon.sermon_date|date:"l" }}</small>
+            </td>
+            <td>
+              {{ sermon.sermon_title }}
+              {% if sermon.sermon_date|date:"Y" == "2024" %}
+                <span class="badge bg-danger ms-2">最新</span>
+              {% endif %}
+            </td>
+            <td>
+              <span class="fs-12">{{ sermon.speaker_name }}</span>
+            </td>
+            <td>
+              <div class="btn-group" role="group">
+                <a href="{{ sermon.youtube_link }}" target="_blank" class="btn btn-danger btn-sm">
+                  <i class="fab fa-youtube me-1"></i>Youtube
+                </a>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="shareSermon('{{ sermon.sermon_title }}', '{{ sermon.youtube_link }}')">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center py-5">
+              <i class="fas fa-video-slash fa-3x text-muted mb-3"></i>
+              <h5>暫無講道資料</h5>
+              <p class="text-muted">請稍後再來查看</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
   </div>
 </section>
 {% endblock %}
 
+{% block extra_css %}
+<style>
+  .sermons-table tr:hover {
+    background-color: #rgba(32, 134, 107, 0.8);
+    transition: background-color 0.2s;
+  }
+  
+  .badge {
+    font-weight: 500;
+  }
+  
+  .card {
+    border: 1px solid rgba(0,0,0,.125);
+  }
+  
+  .table th {
+    font-weight: 600;
+  }
+</style>
+{% endblock %}
+
 {% block extra_js %}
 <script>
-
-window.filterSermons = function() {
-    const year = document.getElementById('year-selector').value;
-    const speaker = document.getElementById('speaker_name-selector').value;
-
-    let params = [];
-    if (year) params.push(`year=${encodeURIComponent(year)}`);
-    if (speaker) params.push(`speaker_name=${encodeURIComponent(speaker)}`);
-
-    let url = "{% url 'worships:sermons_api' %}";
-    if (params.length) {
-        url += '?' + params.join('&');
+// Simple client-side filtering
+document.addEventListener('DOMContentLoaded', function() {
+    const yearFilter = document.getElementById('year-filter');
+    const speakerFilter = document.getElementById('speaker-filter');
+    const allRows = document.querySelectorAll('#sermons-table tbody tr');
+    
+    function filterTable() {
+        const selectedYear = yearFilter.value;
+        const selectedSpeaker = speakerFilter.value;
+        
+        let visibleCount = 0;
+        
+        allRows.forEach(row => {
+            // Skip the "no data" row if it exists
+            if (row.cells[0].colSpan === 4) return;
+            
+            const rowYear = row.getAttribute('data-year');
+            const rowSpeaker = row.getAttribute('data-speaker');
+            
+            let showRow = true;
+            
+            // Apply year filter
+            if (selectedYear && rowYear !== selectedYear) {
+                showRow = false;
+            }
+            
+            // Apply speaker filter
+            if (selectedSpeaker && rowSpeaker !== selectedSpeaker) {
+                showRow = false;
+            }
+            
+            // Toggle row visibility
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // Update counter
+        updateCounter(visibleCount);
+        
+        // Show/hide no results message
+        toggleNoResultsMessage(visibleCount === 0);
     }
-
-    fetch(url)
-        .then(res => res.json())
-        .then(data => renderTable(data.sermons));
-};
-
-function renderTable(sermons) {
-    const tbody = document.querySelector('#sermons-table tbody');
-    tbody.innerHTML = '';
-
-    if (!sermons.length) {
-        tbody.innerHTML = '<tr><td colspan="4">暫無講道資料</td></tr>';
-        return;
+    
+    function updateCounter(count) {
+        const counter = document.getElementById('sermon-counter');
+        if (counter) {
+            counter.textContent = `共 ${count} 篇講道`;
+        }
     }
-
-    sermons.forEach(s => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${s.sermon_date}</td>
-                <td>${s.sermon_title}</td>
-                <td>${s.speaker_name}</td>
-                <td>
-                    <a href="${s.youtube_link}" target="_blank" class="btn btn-danger btn-sm">
-                        ▶ 觀看
-                    </a>
+    
+    function toggleNoResultsMessage(show) {
+        let noResultsRow = document.querySelector('.no-results-row');
+        
+        if (show && !noResultsRow) {
+            const tbody = document.querySelector('#sermons-table tbody');
+            noResultsRow = document.createElement('tr');
+            noResultsRow.className = 'no-results-row';
+            noResultsRow.innerHTML = `
+                <td colspan="4" class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h5>沒有找到匹配的講道</h5>
+                    <p class="text-muted">請嘗試其他篩選條件</p>
+                    <button class="btn btn-link" onclick="clearFilters()">清除所有篩選</button>
                 </td>
-            </tr>
-        `;
+            `;
+            tbody.appendChild(noResultsRow);
+        } else if (!show && noResultsRow) {
+            noResultsRow.remove();
+        }
+    }
+    
+    // Add event listeners
+    yearFilter.addEventListener('change', filterTable);
+    speakerFilter.addEventListener('change', filterTable);
+    
+    // Auto-select current year on page load
+    const currentYear = new Date().getFullYear().toString();
+    const yearOption = Array.from(yearFilter.options).find(opt => opt.value === currentYear);
+    if (yearOption) {
+        yearFilter.value = currentYear;
+        filterTable(); // Apply filter immediately
+    }
+});
+
+// Clear all filters
+window.clearFilters = function() {
+    document.getElementById('year-filter').value = '';
+    document.getElementById('speaker-filter').value = '';
+    
+    // Show all rows
+    const allRows = document.querySelectorAll('#sermons-table tbody tr');
+    allRows.forEach(row => {
+        row.style.display = '';
     });
+    
+    // Remove no results message if present
+    const noResultsRow = document.querySelector('.no-results-row');
+    if (noResultsRow) {
+        noResultsRow.remove();
+    }
+    
+    // Update counter to total count
+    const totalCount = {{ total_sermons }};
+    updateCounter(totalCount);
 };
 
-document.addEventListener('DOMContentLoaded', filterSermons);
+// Helper function to update counter
+function updateCounter(count) {
+    const counter = document.getElementById('sermon-counter');
+    if (counter) {
+        counter.textContent = `共 ${count} 篇講道`;
+    }
+}
+
+// Share sermon function
+window.shareSermon = function(title, url) {
+    if (navigator.share) {
+        navigator.share({
+            title: title,
+            text: '分享這個講道影片：',
+            url: url
+        });
+    } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(`${title}\n${url}`).then(() => {
+            alert('連結已複製到剪貼簿！');
+        });
+    }
+};
 </script>
 {% endblock %}
