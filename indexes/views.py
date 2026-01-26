@@ -16,7 +16,7 @@ def home_page(request):
     # 2. 獲取代禱事項
     recent_prayers = Prayer.objects.filter(
         is_active=True
-    ).order_by('-is_urgent', '-display_date')[:3]
+    ).order_by('-is_urgent', '-display_date')[:]
     
     # 3. 獲取即將到來的活動（可選）
     today = timezone.now().date()
