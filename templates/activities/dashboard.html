@@ -1,10 +1,14 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+<!-- about title -->
+{% block title %} | 我的紀錄 {% endblock %}
+<!-- about content -->
+{% block content %}
 
 <section id="showcase-inner" class="py-5 text-white">
   <div class="container">
     <div class="row text-center">
       <div class="col-md-12">
-        <h3 class="display-4">我的活動</h3>
+        <h3 class="display-4">我的紀錄</h3>
         <p class="lead"></p>
       </div>
     </div>
@@ -14,6 +18,7 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-lg-10 mx-auto">
+      <h2 class="mb-4">我的活動</h2>
       <p class="lead mb-5">
         您好, {{ user.get_full_name|default:user.username }}! 以下是您的活動。
       </p>
