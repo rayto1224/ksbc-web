@@ -1,7 +1,10 @@
 {% extends "base.html" %}
-{% block title %} | 我的活動 {% endblock %}
+<!-- about title -->
+{% block title %} | 我的紀錄 {% endblock %}
+<!-- about content -->
 {% block content %}
-{% include "includes/_topbar.html" with title="我的活動" %}
+{% include "includes/_topbar.html" with title="我的紀錄" %}
+
 
 <div class="container my-5">
   <div class="row">
@@ -9,11 +12,13 @@
       <p class="lead mb-5">歡迎回來，{{ user.get_full_name|default:user.username }}! 以下是您已註冊活動的摘要。</p>
 
       {% if not registrations %}
-        <div class="alert alert-info text-center py-5">
-          <h5>You haven't registered for any events yet.</h5>
-          <p>Explore upcoming events and join one!</p>
-          <a href="{% url 'activities:list' %}" class="btn btn-primary mt-3">Browse Events</a>
-        </div>
+      <div class="alert alert-info text-center py-5">
+        <h5>您還未報名任何活動</h5>
+        <p>探索即將举行的活動並加入一個！</p>
+        <a href="{% url 'activities:list' %}" class="btn btn-primary mt-3"
+          >瀏覽活動</a
+        >
+      </div>
       {% else %}
 
       <!-- Table view for registrations -->
@@ -21,44 +26,47 @@
         <table class="table table-hover table-bordered shadow-sm">
           <thead class="table-dark">
             <tr>
-              <th>Event Title</th>
-              <th>Registration Date</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>活動名稱</th>
+              <th>報名日期</th>
+              <th>狀態</th>
+              <th>動作</th>
             </tr>
           </thead>
           <tbody>
             {% for reg in registrations %}
             <tr>
               <td>
-                <a href="{% url 'activities:detail' event_id=reg.event.event_id %}">
+                <a
+                  href="{% url 'activities:detail' event_id=reg.event.event_id %}"
+                >
                   {{ reg.event.title }}
                 </a>
                 {% if reg.event.is_featured %}
-                  <span class="badge bg-warning ms-2">Featured</span>
+                <span class="badge bg-warning ms-2">熱門</span>
                 {% endif %}
               </td>
               <td>{{ reg.registered_at|date:"d M Y" }}</td>
               <td>
                 {% with status=reg.registration_status %}
-                  <span class="badge {% if status == 'Accepted' %}bg-success
-                                     {% elif status == 'Withdrawn' %}bg-secondary
-                                     {% elif status == 'Event ended' %}bg-info
-                                     {% elif status == 'Rejected' %}bg-danger
-                                     {% else %}bg-primary{% endif %}">
-                    {{ status }}
-                  </span>
+                <span
+                  class="badge {% if status == 'Accepted' %}bg-success {% elif status == 'Withdrawn' %}bg-secondary {% elif status == 'Event ended' %}bg-info {% elif status == 'Rejected' %}bg-danger {% else %}bg-primary{% endif %}"
+                >
+                  {{ status }}
+                </span>
                 {% endwith %}
               </td>
               <td>
                 {% if reg.withdrawal_date %}
-                  <span class="text-muted">Withdrawn on {{ reg.withdrawal_date|date:"d M Y" }}</span>
-                {% elif reg.event.is_expired or reg.event.quota_full or status == 'Rejected' %}
-                  <span class="text-muted">No actions available</span>
+                <span class="text-muted"
+                  >Withdrawn on {{ reg.withdrawal_date|date:"d M Y" }}</span
+                >
                 {% else %}
-                  <a href="{% url 'activities:withdraw' registration_id=reg.id %}" class="btn btn-outline-danger btn-sm">
-                    Withdraw
-                  </a>
+                <a
+                  href="{% url 'activities:withdraw' registration_id=reg.id %}"
+                  class="btn btn-outline-danger btn-sm"
+                >
+                  取消報名
+                </a>
                 {% endif %}
               </td>
             </tr>
@@ -69,26 +77,75 @@
 
       <!-- Pagination if needed -->
       {% if is_paginated %}
-        <nav aria-label="Pagination" class="mt-4">
-          <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-            {% endif %}
-            <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span></li>
-            {% if page_obj.has_next %}
-              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-            {% endif %}
-          </ul>
-        </nav>
-      {% endif %}
+      <nav aria-label="Pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.previous_page_number }}"
+              >上頁</a
+            >
+          </li>
+          {% endif %}
+          <li class="page-item disabled">
+            <span class="page-link"
+              >Page {{ page_obj.number }} of {{ paginator.num_pages }}</span
+            >
+          </li>
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+              >下頁</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %} {% endif %}
 
-      {% endif %}
+      <!-- My Donations Section -->
+      <h2 class="mb-4 mt-5">我的奉獻紀錄</h2>
+      {% if not grouped_donations %}
+      <div class="alert alert-light text-center border">
+        <p class="mb-0">未有奉獻紀錄</p>
+      </div>
+      {% else %} {% for group in grouped_donations %}
+      <div class="card mb-4 shadow-sm bg-transparent">
+        <div class="card-header text-white" style="background-color: #20866b">
+          <h5 class="mb-0">財政年度: {{ group.financial_year }}</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered mb-0">
+            <thead class="table-light bg-transparent">
+              <tr>
+                <th>日期</th>
+                <th>金額</th>
+                <th>備註</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for donation in group.list %}
+              <tr>
+                <td>{{ donation.date|date:"d M Y" }}</td>
+                <td>HKD {{ donation.amount }}</td>
+                <td>{{ donation.notes|default:"-" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
 
       <!-- Quick links -->
       <div class="text-center mt-5">
-        <a href="{% url 'activities:list' %}" class="btn btn-outline-primary">Find More Events</a>
+        <a href="{% url 'activities:list' %}" class="btn btn-outline-primary"
+          >更多活動</a
+        >
       </div>
 
+      <!-- -->
     </div>
   </div>
 </div>
