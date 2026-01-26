@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from .models import Event, EventParticipant
+from .models import Event, EventParticipant, Donation
 from .forms import EventRegistrationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
@@ -170,6 +170,31 @@ class UserDashboardView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user  # for personalization
+
+        # Group donations by Financial Year (April 1 - March 31)
+        # Result structure: [ {'financial_year': '2025-2026', 'donations': [obj, obj]}, ... ]
+        donations = Donation.objects.filter(user=self.request.user).order_by('-date')
+        
+        from collections import defaultdict
+        grouped_donations = defaultdict(list)
+        
+        for donation in donations:
+            if donation.date.month >= 4:
+                fy = f"{donation.date.year}-{donation.date.year + 1}"
+            else:
+                fy = f"{donation.date.year - 1}-{donation.date.year}"
+            grouped_donations[fy].append(donation)
+            
+        # Convert to a sorted list of tuples/dicts for the template
+        # Sort headers descending (e.g. 2025-2026, 2024-2025)
+        # sorted_items = sorted(grouped_donations.items(), key=lambda x: x[0], reverse=True)
+        # Better: create a list of dicts to be more template-friendly
+        
+        context['grouped_donations'] = sorted(
+            [{'financial_year': k, 'list': v} for k, v in grouped_donations.items()],
+            key=lambda x: x['financial_year'],
+            reverse=True
+        )
         return context
 
 
