@@ -60,6 +60,8 @@
                 <span class="text-muted"
                   >Withdrawn on {{ reg.withdrawal_date|date:"d M Y" }}</span
                 >
+                {% elif reg.event.is_expired or reg.event.quota_full or status == 'Rejected' %}
+                  <span class="text-muted">No actions available</span>
                 {% else %}
                 <a
                   href="{% url 'activities:withdraw' registration_id=reg.id %}"
