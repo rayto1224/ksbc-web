@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+<!-- load static -->
+{% load static %}
+<!-- load title -->
+{% block title %}{{ ministry.title}}{% endblock %}
+<!-- loading block -->
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-md-8">
+        <h1 class="mb-3">{{ ministry.title }}</h1>
+
+        <p class="text-muted">
+          {{ ministry.activity_date|date:"Y年m月d日" }}
+          <!-- if -->
+          {% if ministry.location %} · {{ ministry.location }} {% endif %}
+        </p>
+
+        {% if ministry.image %}
+        <img
+          src="{{ ministry.image.url }}"
+          alt="{{ ministry.title }}"
+          class="img-fluid rounded mb-4"
+          style="max-height: 420px; width: 100%; object-fit: cover"
+        />
+        {% endif %} {% if ministry.description %}
+        <div class="text-start mt-4">{{ ministry.description|linebreaks }}</div>
+        {% endif %}
+
+        <a
+          href="{% url 'indexes:home' %}"
+          class="btn btn-outline-secondary mt-4"
+        >
+          ← 返回首頁
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

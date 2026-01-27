@@ -21,13 +21,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('activities/',include('activities.urls',namespace='activities')),
-    path('',include('pages.urls',namespace='pages')),
+    path("", include("indexes.urls")),
+    path("activities/", include("activities.urls", namespace="activities")),
+    path("pages/", include("pages.urls", namespace="pages")),
     path("fellowship/", include("fellowship.urls", namespace="fellowship")),
-    path('newsletter/',include('newsletter.urls',namespace='newsletter')),
-    path('worships/',include('worships.urls', namespace='worships')),
-    path('accounts/',include('accounts.urls',namespace='accounts')),
-    path('admin/', admin.site.urls),
+    path("newsletter/", include("newsletter.urls", namespace="newsletter")),
+    path("worships/", include("worships.urls", namespace="worships")),
+    path("accounts/", include("accounts.urls", namespace="accounts")),
+    path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
