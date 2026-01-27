@@ -36,18 +36,19 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'pages.apps.PagesConfig',
-    'worships.apps.WorshipsConfig',
-    'newsletter.apps.NewsletterConfig',
-    'accounts.apps.AccountsConfig',
-    'activities.apps.ActivitiesConfig',
-    'fellowship.apps.FellowshipConfig',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "pages.apps.PagesConfig",
+    "worships.apps.WorshipsConfig",
+    "newsletter.apps.NewsletterConfig",
+    "accounts.apps.AccountsConfig",
+    "activities.apps.ActivitiesConfig",
+    "fellowship.apps.FellowshipConfig",
+    "indexes.apps.IndexesConfig",
 ]
 
 MIDDLEWARE = [
@@ -138,25 +139,25 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "config/static")]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 MESSAGE_TAGS = {
-    messages.DEBUG: 'secondary',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
+    messages.DEBUG: "secondary",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
 }
 
-LOGIN_REDIRECT_URL = 'activities:dashboard'
+LOGIN_REDIRECT_URL = "activities:dashboard"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_SENT')
+EMAIL_HOST_USER = os.getenv("EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_SENT")
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = "SAMEORIGIN"
