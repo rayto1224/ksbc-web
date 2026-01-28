@@ -32,7 +32,7 @@
               <i class="fas fa-hands-helping me-2"></i>事工動態
             </h4>
           </div>
-          <div class="card-body p-4" style="height: 520px; overflow-y: hidden">
+          <div class="card-body p-4" style="height: 450px; overflow-y: hidden">
             {% if recent_ministries %}
             <div
               id="ministryCarousel"
@@ -86,20 +86,6 @@
                 </div>
                 {% endfor %}
               </div>
-
-              <!-- optional  
-                                {% if recent_ministries|length > 1 %}
-                                <button class="carousel-control-prev" 
-                                        type="button" 
-                                        data-bs-target="#ministryCarousel" 
-                                        data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#ministryCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-                                </button>
-                                {% endif %}
-                                optional cancel , useless-->
             </div>
             {% else %}
             <div class="h-100 d-flex align-items-center justify-content-center">
@@ -115,10 +101,10 @@
           <div class="card-header bg-success text-white">
             <h4 class="mb-0"><i class="fas fa-pray me-2"></i>代禱事項</h4>
           </div>
-          <div class="card-body p-0">
+          <div class="card-body p-4">
             <div
               class="prayer-scroll px-4 py-20"
-              style="height: 520px; overflow-y: auto"
+              style="height: 450px; overflow-y: auto"
             >
               {% if recent_prayers %}
               <div class="prayer-list">

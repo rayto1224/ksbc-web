@@ -9,40 +9,7 @@
 {% block content %}
 {% include "includes/_topbar.html" with title="團契小組" subtitle="聚會時間表" %}
 
-
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"
-    />
-    <style>
-      .card-header {
-        background-color: #20866b;
-        color: white;
-      }
-      .list-group-item.active {
-        background-color: #20866b;
-        border-color: #20866b;
-        color: white;
-      }
-      .list-group-item {
-        background-color: #cdefe6;
-        border-color: #20866b;
-        color: rgb(56, 56, 56);
-      }
-      /* Ensure text remains readable on hover if not active */
-      .list-group-item:hover:not(.active) {
-        background-color: #f8f9fa;
-        color: #20866b;
-      }
-    </style>
-  </head>
-  <body>
+  
     <div class="container py-4">
       <div class="alert alert-secondary mb-0">
         請點擊聚會項目，下方會顯示活動內容與 Poster。
@@ -123,6 +90,6 @@
     `;
       });
     </script>
-  </body>
+
 
 {% endblock %}

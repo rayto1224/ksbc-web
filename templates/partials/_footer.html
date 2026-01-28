@@ -1,99 +1,143 @@
 {% load static %}
-<footer id="main-footer" class="pt-5 pb-3">
+
+<footer id="main-footer" class="pt-4 pb-3">
     <div class="container">
         <div class="row">
-            <!-- Column 1: Church Info -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="footer-slogan mb-4">
-                    <img src="{% static 'img/slogan.jpg' %}" alt="Ka Shing Baptist Church Slogan" class="footer-slogan-img img-fluid">
-                </div>
+
+            <!-- Column 1: Church Intro + Social -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <h5 class="fw-bold mb-3">嘉盛浸信會</h5>
                 <p class="text-muted">
-                    Ka Shing Baptist Church is a community of faith dedicated to worship, fellowship, and service.
+                    我們是一群委身於敬拜、團契與服事的信仰群體，盼望在粉嶺社區見證基督的愛與真理。
                 </p>
-                <div class="social mt-4">
-                    <a href="#" class="text-decoration-none me-3">
-                        <i class="fab fa-facebook fa-lg"></i>
+                <div class="social mt-3">
+                    <a href="https://www.facebook.com/kashingbaptist" 
+                       class="text-decoration-none me-3" 
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Facebook">
+                        <i class="fab fa-facebook-f fa-2x"></i>
                     </a>
-                    <a href="#" class="text-decoration-none me-3">
-                        <i class="fab fa-twitter fa-lg"></i>
-                    </a>
-                    <a href="#" class="text-decoration-none me-3">
-                        <i class="fab fa-instagram fa-lg"></i>
-                    </a>
-                    <a href="#" class="text-decoration-none">
-                        <i class="fab fa-youtube fa-lg"></i>
+                    <a href="https://www.youtube.com/@KaShingBaptist/playlists" 
+                       class="text-decoration-none" 
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="YouTube">
+                        <i class="fab fa-youtube fa-2x"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Column 2: Quick Links -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h5 class="fw-bold mb-4">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{% url 'pages:about' %}" class="text-decoration-none text-muted">歷史</a></li>
-                    <li class="mb-2"><a href="{% url 'pages:team' %}" class="text-decoration-none text-muted">團隊</a></li>
-                    <li class="mb-2"><a href="{% url 'pages:faith' %}" class="text-decoration-none text-muted">信仰</a></li>
-                    <li class="mb-2"><a href="{% url 'pages:partners' %}" class="text-decoration-none text-muted">夥伴</a></li>
-                    <li class="mb-2"><a href="{% url 'pages:contact' %}" class="text-decoration-none text-muted">聯絡</a></li>
+            <!-- Column 2: Quick Links (mirrors some nav items) -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <h5 class="fw-bold mb-3">快速連結</h5>
+                <ul class="list-unstyled text-muted">
+                    <li class="mb-2"><a href="{% url 'pages:about' %}" class="text-muted text-decoration-none">我們的歷史</a></li>
+                    <li class="mb-2"><a href="{% url 'pages:faith' %}" class="text-muted text-decoration-none">我們的信仰</a></li>
+                    <li class="mb-2"><a href="{% url 'worships:worship' %}" class="text-muted text-decoration-none">崇拜講道</a></li>
+                    <li class="mb-2"><a href="{% url 'fellowship:fellowship' %}" class="text-muted text-decoration-none">團契小組</a></li>
+                    <li class="mb-2"><a href="{% url 'activities:list' %}" class="text-muted text-decoration-none">活動一覽</a></li>
+                    <li class="mb-2"><a href="{% url 'newsletter:archive' %}" class="text-muted text-decoration-none">牧者心聲</a></li>
                 </ul>
             </div>
 
             <!-- Column 3: Contact Info -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="fw-bold mb-4">Contact Us</h5>
+            <div class="col-lg-4 col-md-12">
+                <h5 class="fw-bold mb-3">聯絡我們</h5>
                 <ul class="list-unstyled text-muted">
                     <li class="mb-3">
                         <i class="fas fa-map-marker-alt me-2"></i>
-                        <span>粉嶺嘉盛苑嘉耀閣地下</span>
+                        <span>香港新界粉嶺嘉盛苑嘉耀閣地下<br>
+                              G/F, Ka Yiu House, Ka Shing Court, Fanling, N.T., Hong Kong</span>
                     </li>
-                    <li class="mb-3">
+                    <li class="mb-2">
                         <i class="fas fa-phone me-2"></i>
-                        <span>(852) 2676-7978</span>
+                        <a href="tel:+85226767978" class="text-muted text-decoration-none">(852) 2676 7978</a>
                     </li>
-                    <li class="mb-3">
+                    <li class="mb-2">
                         <i class="fas fa-envelope me-2"></i>
-                        <span>contact@ksbaptist-hk.org</span>
+                        <a href="mailto:contact@ksbaptist-hk.org" class="text-muted text-decoration-none">contact@ksbaptist-hk.org</a>
                     </li>
-                    <li class="mb-3">
+                    <li class="mb-2">
                         <i class="fas fa-clock me-2"></i>
-                        <span>Sunday Service: 10:00 AM</span>
+                        <span>主日崇拜：上午9:00</span>
                     </li>
                 </ul>
             </div>
-
-            <!-- Column 4: Newsletter -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="fw-bold mb-4">Stay Updated</h5>
-                <p class="text-muted">Subscribe to our newsletter for the latest updates and events.</p>
-                <a href="{% url 'newsletter:archive' %}" class="btn btn-outline-dark btn-sm">View Newsletters</a>
-            </div>
         </div>
 
-        <hr class="my-4">
+        <hr class="my-3 border-secondary">
 
         <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="footer-copyright text-muted">
-                    Copyright &copy; <span class="year"></span> Ka Shing Baptist Church. All Rights Reserved.
+            <div class="col-12 text-center">
+                <div class="footer-copyright text-muted small">
+                    Copyright &copy; <span id="current-year"></span> 嘉盛浸信會 Ka Shing Baptist Church. All Rights Reserved.
                 </div>
             </div>
         </div>
     </div>
 </footer>
 
+<!-- Optional: Back to top button (matches sticky nav feel) -->
+<a href="#" id="back-to-top" class="btn btn-primary btn-lg rounded-circle position-fixed bottom-0 end-0 m-4 shadow d-none" aria-label="回到頁頂">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
 <style>
     #main-footer {
-        background-color: #CCFFEB;
-        color: #333;
+        background-color: #b0e5d0 !important;
+        opacity: 0.9;
+        color: #495057;
     }
-    #main-footer a.text-muted:hover {
+
+    #main-footer h5 {
+        color: #212529;
+        font-weight: 600;
+    }
+
+    #main-footer a.text-muted {
+        transition: color 0.2s;
+    }
+
+    #main-footer a.text-muted:hover,
+    #main-footer a.text-muted:focus {
         color: #0d6efd !important;
+        text-decoration: underline;
     }
+
     .social a {
-        color: #555;
-        transition: color 0.3s;
+        color: #6c757d;
+        transition: all 0.25s;
     }
+
     .social a:hover {
         color: #0d6efd;
+        transform: translateY(-3px);
+    }
+
+    #back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        line-height: 1;
+        opacity: 0.85;
+    }
+
+    #back-to-top:hover {
+        opacity: 1;
     }
 </style>
+
+<!-- JavaScript for year + back-to-top -->
+<script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Back to top visibility
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTop.classList.remove('d-none');
+        } else {
+            backToTop.classList.add('d-none');
+        }
+    });
+</script>
