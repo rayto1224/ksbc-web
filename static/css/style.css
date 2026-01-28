@@ -98,7 +98,39 @@ img {
 }
 
 #register .card-header {
-  background-color: rgba(32, 134, 107, 0.7);
+  background-color: rgba(32, 134, 107, 0.7) !important;
+}
+
+#login .card-header {
+  background-color: rgba(32, 134, 107, 0.7) !important;
+}
+
+/* Event list register button */
+.card .btn-primary {
+  background-color: rgb(64, 126, 109) !important;
+  border-color: rgb(64, 126, 109) !important;
+}
+
+.card .btn-primary:hover {
+  background-color: rgba(22, 92, 74, 0.6) !important;
+  border-color: rgba(22, 92, 74, 0.6) !important;
+}
+
+/* Fellowship page card header */
+.container.py-4 .card-header {
+  background-color: rgba(32, 134, 107, 0.7) !important;
+  color: white !important;
+}
+
+/* Fellowship page list group item hover */
+.container.py-4 .list-group-item:hover {
+  background-color: rgba(247, 156, 59, 0.2) !important;
+}
+
+/* Fellowship page list group item active (selected) */
+.container.py-4 .list-group-item.active {
+  background-color: rgba(247, 156, 59) !important;
+  color: white !important;
 }
 
 /* Dashboard table transparency */
@@ -132,12 +164,41 @@ img {
   color: white;
 }
 
-#sermons-table tbody tr {
-  background-color: rgba(255, 255, 255, 0.3);
+/* Striped table rows */
+#sermons-table.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#sermons-table.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #sermons-table tbody tr:hover {
   background-color: rgba(247, 156, 59, 0.2);
+}
+
+/* Pagination dark green styling */
+.pagination .page-link {
+  color: #006400;
+  border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #006400;
+  border-color: #006400;
+  color: white;
+}
+
+.pagination .page-link:hover {
+  color: #004d00;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link:hover {
+  background-color: #004d00;
+  border-color: #004d00;
+  color: white;
 }
 
 @media (max-width: 991px) {
