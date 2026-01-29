@@ -37,7 +37,7 @@ body::after {
 }
 
 #main-footer {
-  background-color: rgba(204, 255, 235, 0.5);
+  background-color: rgba(204, 255, 235, 0.9) !important;
 }
 
 .footer-slogan {
@@ -74,7 +74,7 @@ img {
 .navbar {
   opacity: 0.9;
   text-transform: uppercase;
-  background-color: #b0e5d0; }
+  background-color: rgba(204,255,235) !important; }
 
 .social a {
   margin-right: 0.4rem; }
