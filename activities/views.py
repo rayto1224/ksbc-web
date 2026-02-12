@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from datetime import timedelta
 from .models import Event, EventParticipant, Donation
 from .forms import EventRegistrationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,10 +25,10 @@ class UpcomingEventsListView(ListView):
 
     def get_queryset(self):
         today = timezone.now().date()
+        one_month_ago = today - timedelta(days=30)
         qs = Event.objects.filter(is_active=True).filter(
             Q(is_announcement=True) |
-            Q(start_date__gte=today) |
-            Q(appl_deadline__isnull=True)
+            Q(start_date__gt=one_month_ago) 
         ).select_related()
         # Featured first, then by event_id descending (newest first)
         return qs.order_by('-is_featured', 'is_announcement', '-start_date')
@@ -106,8 +107,8 @@ class EventRegistrationCreateView(CreateView):
             # Always use user's account email for authenticated users
             # to ensure dashboard can find all their registrations
             form.instance.email = self.request.user.email
-
-        # Decrease quota_left if not unlimited
+        
+        # Decrease quota_left if not unlimited 
         if not self.event.unlimited_quota and self.event.quota_left > 0:
             # Use atomic update to avoid race conditions
             Event.objects.filter(
@@ -116,10 +117,8 @@ class EventRegistrationCreateView(CreateView):
             ).update(quota_left=F('quota_left') - 1)
             # Refresh the event object from database
             self.event.refresh_from_db()
-
         # Save the form first to get the participant instance
         response = super().form_valid(form)
-        
         # Send confirmation email
         try:
             participant = form.instance

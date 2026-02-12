@@ -20,13 +20,25 @@
         
         {% if event.quota_full and not event.is_announcement %}
         <div class="card-header bg-danger text-white fw-bold text-center">
-          滿額
+          名額已滿
+        </div>
+        {% elif event.unlimited_quota %}
+        <div class="card-header bg-success text-white fw-bold text-center">
+          不設限額
+        </div>
+        {% elif event.is_announcement %} 
+        <div class="card-header bg-info text-white fw-bold text-center">
+          不設報名
+        </div>
+        {% else %}
+        <div class="card-header bg-success text-white fw-bold text-center">
+          接受報名
         </div>
         {% endif %}
 
         {% if event.poster %}
         <a href="{{ event.poster.url }}" data-lightbox="poster-{{ event.event_id }}" data-title="{{ event.title }}" title="Click to enlarge">
-          <img src="{{ event.poster.url }}" class="card-img-top" alt="{{ event.title }}" style="max-height: 180px; width: 100%; height: auto; object-fit: contain; cursor: pointer;">
+          <img src="{{ event.poster.url }}" class="card-img-top" alt="{{ event.title }}" style="max-height: 180px; width: 100%; height: auto; object-fit: contain; cursor: pointer; padding: 8px;">
         </a>
         {% endif %}
 
@@ -48,11 +60,7 @@
             {% else %}
               <strong></strong>
             {% endif %}
-            {% if event.is_announcement %}
-              <button class="btn btn-outline-info disabled" disabled>
-                Info Only
-              </button>
-            {% else %}
+            {% if not event.is_announcement %}
               <a href="{% url 'activities:detail' event_id=event.event_id %}"
                  class="btn {% if event.quota_full %}btn-outline-secondary disabled{% elif event.is_expired %}btn-danger disabled{% else %}btn-primary{% endif %}">
                 {% if event.quota_full %}Sold Out
@@ -66,6 +74,10 @@
         <div class="card-footer text-muted small">
           {% if not event.is_announcement and event.appl_deadline %}
             Application deadline: {{ event.appl_deadline|date:"d M Y" }}
+          {% elif event.is_announcement %}
+            Information only
+          {% else %}
+            Rolling admissions
           {% endif %}
         </div>
       </div>

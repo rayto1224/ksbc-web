@@ -175,9 +175,9 @@ class EventParticipant(models.Model):
             return "Withdrawn"
         if self.event.is_expired:
             return "Event ended"
-        # Check if event quota is full
-        if self.event.quota_full:
-            return "Rejected"
+        # If participant has a record, they were accepted
+        # The quota_full check is removed because it reflects current status,
+        # not status at time of registration
         return "Accepted"
 
 
